@@ -16,7 +16,7 @@
 // export default App;
 
 
-import Flames from "./components/Flames";
+import Flames from "./Flames";
 
 function App() {
   return (
