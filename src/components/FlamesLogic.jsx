@@ -1,75 +1,33 @@
-import { useState } from "react";
-import calculateFlames from "../utils/flamesLogic";
+function calculateFlames(name1, name2) {
+  let arr1 = name1.split("");
+  let arr2 = name2.split("");
 
-function Flames() {
-  const [name1, setName1] = useState("");
-  const [name2, setName2] = useState("");
-  const [result, setResult] = useState("");
+  // Remove common characters
+  for (let i = 0; i < arr1.length; i++) {
+    let index = arr2.indexOf(arr1[i]);
 
-  const handleCalculate = () => {
-    if (name1.trim() === "" || name2.trim() === "") {
-      setResult("Please Enter valid input");
-      return;
+    if (index !== -1) {
+      arr1[i] = null;
+      arr2[index] = null;
     }
+  }
 
-    const output = calculateFlames(name1, name2);
-    setResult(output);
+  // Remaining characters
+  const remaining1 = arr1.filter((char) => char !== null);
+  const remaining2 = arr2.filter((char) => char !== null);
+
+  const count = remaining1.length + remaining2.length;
+
+  const resultMap = {
+    1: "Friends",
+    2: "Love",
+    3: "Affection",
+    4: "Marriage",
+    5: "Enemy",
+    0: "Siblings",
   };
 
-  const handleClear = () => {
-    setName1("");
-    setName2("");
-    setResult("");
-  };
-
-  return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>FLAMES App</h1>
-
-      <input
-        type="text"
-        name="name1"
-        data-testid="input1"
-        placeholder="Enter First Name"
-        value={name1}
-        onChange={(e) => setName1(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <input
-        type="text"
-        name="name2"
-        data-testid="input2"
-        placeholder="Enter Second Name"
-        value={name2}
-        onChange={(e) => setName2(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <button
-        name="calculate_relationship"
-        data-testid="calculate_relationship"
-        onClick={handleCalculate}
-      >
-        Calculate Relationship Future
-      </button>
-
-      <button
-        name="clear"
-        data-testid="clear"
-        onClick={handleClear}
-        style={{ marginLeft: "10px" }}
-      >
-        Clear
-      </button>
-
-      <h3 data-testid="answer">{result}</h3>
-    </div>
-  );
+  return resultMap[count % 6];
 }
 
-export default Flames;
+export default calculateFlames;
