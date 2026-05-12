@@ -16,7 +16,8 @@
 // export default App;
 
 
-import Flames from "./FlamesLogic";
+import React from "react";
+import Flames from "./Flames";
 
 function App() {
   return (
