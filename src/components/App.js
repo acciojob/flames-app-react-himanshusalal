@@ -16,7 +16,7 @@
 // export default App;
 
 
-import Flames from "./Flames";
+import Flames from "./FlamesLogic";
 
 function App() {
   return (
